@@ -1,25 +1,25 @@
-
 async function getsongs() {
+    try {
+        const owner = 'DevOwais28';
+        const repo = 'owais-ahmed';
+        const path = 'Spotify/Songs';
 
-    let a = await fetch("https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/")
-
-    let response = await a.text();
-    console.log(response)
-
-    let div = document.createElement('div') // create a temp div
-    div.innerHTML = response // taking response whole html document(response) to div
-    let as = div.getElementsByTagName('a') // taking all song links 
-    let songs = []
-    for (let index = 0; index < as.length; index++) {
-        const element = as[index]
-        if (element.href.endsWith('.mp3')) {
-            songs.push(element.href)
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
+        
+        const data = await response.json();
+        let songs = data
+            .filter(item => item.type === 'file' && item.name.endsWith('.mp3'))
+            .map(item => item.download_url);
+
+        return songs;
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+        return [];
     }
-    return songs
 }
-
-
 
 // let currentAudio = null;
 function main(){
