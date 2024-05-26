@@ -2,7 +2,7 @@
 
 async function getsongs() {
     
-    let a = await fetch("Songs")
+    let a = await fetch("https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/")
    
     let response = await a.text();
     console.log(response)
