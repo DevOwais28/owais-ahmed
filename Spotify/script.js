@@ -1,28 +1,25 @@
 
-
 async function getsongs() {
-    const repo = 'DevOwais28/owais-ahmed';
-            const path = 'Spotify/Songs';
-            const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
 
-            try {
-                let response = await fetch(apiUrl);
-                if (response.ok) {
-                    let data = await response.json();
-                    let songs = data
-                        .filter(file => file.name.endsWith('.mp3'))
-                        .map(file => `https://raw.githubusercontent.com/${repo}/main/${path}/${file.name}`);
-                    return songs;
-                } else {
-                    console.error("Failed to fetch directory contents:", response.statusText);
-                    return [];
-                }
-            } catch (error) {
-                console.error("Error fetching directory contents:", error);
-                return [];
-            }
-    
+    let a = await fetch("https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/")
+
+    let response = await a.text();
+    console.log(response)
+
+    let div = document.createElement('div') // create a temp div
+    div.innerHTML = response // taking response whole html document(response) to div
+    let as = div.getElementsByTagName('a') // taking all song links 
+    let songs = []
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index]
+        if (element.href.endsWith('.mp3')) {
+            songs.push(element.href)
+        }
+    }
+    return songs
 }
+
+
 
 // let currentAudio = null;
 function main(){
