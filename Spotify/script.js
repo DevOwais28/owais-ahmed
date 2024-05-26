@@ -38,13 +38,19 @@ function main(){
         }
     });
     promise.then((songs)=>{
-        let songul = document.querySelector(".songslist").getElementsByTagName("ul")[0]
-        for (const song of songs) {
-    
-            let so = song.slice(28).replace(/%20/g, '').replace(/_320\(PaglaSongs\)/, '').replace(/_320\(PagalWorld\)/, '').replace(/\(PagalWorld\)/, '');
-            songul.innerHTML = songul.innerHTML + `<li><img src="https://img.icons8.com/?size=50&id=Fac-6DFxc1E7&format=png" alt="">
-    <div class="info">${so}</div></li>`
-        }
+    let songul = document.querySelector(".songslist").getElementsByTagName("ul")[0]
+    let songHtml = ''; // Initialize an empty string to concatenate HTML for each song
+    for (const song of songs) {
+        let so = song.slice(28).replace(/%20/g, '').replace(/_320\(PaglaSongs\)/, '').replace(/_320\(PagalWorld\)/, '').replace(/\(PagalWorld\)/, '');
+        // Concatenate HTML for each song
+        songHtml += `<li><img src="https://img.icons8.com/?size=50&id=Fac-6DFxc1E7&format=png" alt="">
+        <div class="info">${so}</div></li>`;
+    }
+
+    // Append the concatenated HTML to the inner HTML of the <ul> element
+    songul.innerHTML = songHtml;
+
+
     
         let select = document.querySelector(".playbuttons .plays");
         let currentAudio = null; 
