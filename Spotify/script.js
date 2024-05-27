@@ -1,29 +1,33 @@
 async function getSongs() {
-    const owner = 'DevOwais28';
-    const repo = 'owais-ahmed';
-    const path = 'Spotify/Songs';
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
     try {
-        let response = await fetch(url);
+        // Fetch the HTML of the GitHub repository directory
+        let response = await fetch("https://github.com/DevOwais28/owais-ahmed/tree/main/Spotify/Songs");
 
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
 
-        let files = await response.json();
-        console.log(files);  // Log the files for debugging
+        let html = await response.text();
+        console.log(html);  // Log the HTML for debugging
 
-        if (Array.isArray(files)) {
-            let songs = files
-                .filter(file => file.name.endsWith('.mp3'))
-                .map(file => file.download_url);
+        // Create a div element to hold the HTML content
+        let div = document.createElement('div');
+        div.innerHTML = html;
 
-            return songs;
-        } else {
-            console.error('Unexpected response format:', files);
-            return [];
+        // Select all links with the class 'js-navigation-open'
+        let links = div.querySelectorAll('a.js-navigation-open');
+        let songs = [];
+
+        for (let index = 0; index < links.length; index++) {
+            const element = links[index];
+            console.log(element);  // Log each link element for debugging
+            if (element.title.endsWith('.mp3')) {
+                let songUrl = `https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/${element.title}`;
+                songs.push(songUrl);
+            }
         }
+
+        return songs;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
         return [];
