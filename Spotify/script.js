@@ -1,37 +1,21 @@
-async function getSongs() {
-    try {
-        // Fetch the HTML of the GitHub repository directory
-        let response = await fetch("https://github.com/DevOwais28/owais-ahmed/tree/main/Spotify/Songs");
+async function getsongs() {
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+    let a = await fetch("/Songs/")
+
+    let response = await a.text();
+    console.log(response)
+
+    let div = document.createElement('div') // create a temp div
+    div.innerHTML = response // taking response whole html document(response) to div
+    let as = div.getElementsByTagName('a') // taking all song links 
+    let songs = []
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index]
+        if (element.href.endsWith('.mp3')) {
+            songs.push(element.href)
         }
-
-        let html = await response.text();
-        console.log(html);  // Log the HTML for debugging
-
-        // Create a div element to hold the HTML content
-        let div = document.createElement('div');
-        div.innerHTML = html;
-
-        // Select all links with the class 'js-navigation-open'
-        let links = div.querySelectorAll('a.js-navigation-open');
-        let songs = [];
-
-        for (let index = 0; index < links.length; index++) {
-            const element = links[index];
-            console.log(element);  // Log each link element for debugging
-            if (element.title.endsWith('.mp3')) {
-                let songUrl = `https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/${element.title}`;
-                songs.push(songUrl);
-            }
-        }
-
-        return songs;
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-        return [];
     }
+    return songs
 }
 
 
