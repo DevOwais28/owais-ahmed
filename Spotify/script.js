@@ -1,27 +1,17 @@
 async function getSongs() {
     try {
-        let response = await fetch("https://github.com/DevOwais28/owais-ahmed/tree/main/Spotify/Songs");
+        let response = await fetch("https://api.github.com/repos/DevOwais28/owais-ahmed/contents/Spotify/Songs");
 
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
 
-        let html = await response.text();
-        console.log(html);
+        let files = await response.json();
+        console.log(files);  // Log the files for debugging
 
-        let div = document.createElement('div');
-        div.innerHTML = html;
-
-        let links = div.querySelectorAll('a.js-navigation-open');
-        let songs = [];
-
-        for (let index = 0; index < links.length; index++) {
-            const element = links[index];
-            if (element.title.endsWith('.mp3')) {
-                let songUrl = `https://raw.githubusercontent.com/DevOwais28/owais-ahmed/main/Spotify/Songs/${element.title}`;
-                songs.push(songUrl);
-            }
-        }
+        let songs = files
+            .filter(file => file.name.endsWith('.mp3'))
+            .map(file => file.download_url);
 
         return songs;
     } catch (error) {
@@ -30,8 +20,6 @@ async function getSongs() {
     }
 }
 
-// Example usage
-getSongs().then(songs => console.log(songs));
 
 
 // let currentAudio = null;
