@@ -1,6 +1,11 @@
 async function getSongs() {
+    const owner = 'DevOwais28';
+    const repo = 'owais-ahmed';
+    const path = 'Spotify/Songs';
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
     try {
-        let response = await fetch("https://api.github.com/repos/DevOwais28/owais-ahmed/contents/Spotify/Songs");
+        let response = await fetch(url);
 
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
@@ -9,11 +14,16 @@ async function getSongs() {
         let files = await response.json();
         console.log(files);  // Log the files for debugging
 
-        let songs = files
-            .filter(file => file.name.endsWith('.mp3'))
-            .map(file => file.download_url);
+        if (Array.isArray(files)) {
+            let songs = files
+                .filter(file => file.name.endsWith('.mp3'))
+                .map(file => file.download_url);
 
-        return songs;
+            return songs;
+        } else {
+            console.error('Unexpected response format:', files);
+            return [];
+        }
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
         return [];
