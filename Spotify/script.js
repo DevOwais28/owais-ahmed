@@ -1,31 +1,27 @@
-async function getSongs() {
-    try {
-        let response = await fetch("https://api.github.com/repos/DevOwais28/owais-ahmed/contents/Spotify/Songs");
+document.addEventListener('DOMContentLoaded', main);
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+async function getsongs() {
+    let a = await fetch("/songs/");
+    let response = await a.text();
+    console.log(response);
+
+    let div = document.createElement('div');
+    div.innerHTML = response;
+    let as = div.getElementsByTagName('a');
+    let songs = [];
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index];
+        if (element.href.endsWith('.mp3')) {
+            songs.push(element.href);
         }
-
-        let files = await response.json();
-        console.log("Files:", files);  // Log the files for debugging
-
-        let songs = files
-            .filter(file => file.name.endsWith('.mp3'))
-            .map(file => file.download_url);
-
-        return songs;
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-        return [];
     }
+    return songs;
 }
 
 
 // let currentAudio = null;
 function main(){
- 
-
-    let songs;
+   let songs;
 // //    document.query
 // Selector(".left").style.innerhtml=
     let promise = new Promise(async (res, rej) => {
