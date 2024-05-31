@@ -52,3 +52,7 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #888; /* Lighter color when hovered over */
 }
+    .back {
+    /* Disable tap highlight on mobile devices */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
