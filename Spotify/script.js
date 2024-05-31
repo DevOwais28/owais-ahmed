@@ -67,18 +67,18 @@ function main() {
 
         document.querySelectorAll('.songslist li').forEach((listItem) => {
             listItem.addEventListener('click', async (e) => {
-                let clickedSong = e.target.textContent.trim();
+                let clickedSong = e.target.textContent
                 let normalizedSongs = fetsongs.map(song => song.split(/[\(_]/)[0] + ".mp3");
         
                 matchingSong = fetsongs.find((song, index) => {
                     let normalized = normalizedSongs[index];
-                    console.log(normalized); // Output the normalized song name
                     if (normalized === clickedSong){
                         return song;
-                    }
+                    }else{
+                    console.log("song not found")
                 });
                 let matchedSong = await getsongs(matchingSong);
-                console.log(matchedSong)
+                console.log('matchedSong :' + matchedSong)
                 
                 if (matchedSong) {
                     if (currentAudio && !currentAudio.paused) {
