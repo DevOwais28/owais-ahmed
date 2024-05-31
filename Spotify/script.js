@@ -1,5 +1,4 @@
-async function getsongs(matchingSong) {
-    try {
+  try {
         let response = await fetch(`/Songs/${matchingSong}`);
         let audioURL =  response.url; // Assuming the response is the URL of the audio file
         audioURL.preload='auto'
@@ -80,6 +79,9 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                         currentAudio.currentTime = 0;
                     }
               }
+            }else {
+                console.error('Song not found in the songs array.');
+            }
                     currentAudio = new Audio(matchedSong);
                     currentAudio.preload = "auto";
                     currentAudio.play();
@@ -92,31 +94,7 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                             document.querySelector(".seekbar .circle").style.left = percentage + "%";
                         }
                     })
-                                                  }else {
-            console.error('Song not found in the songs array.');
-        }
-    });
-    
-        // document.querySelectorAll('.songslist li').forEach((listItem) => {
-        //     listItem.addEventListener('click', async (e) => {
-        //         let clickedSong = e.target.textContent
-        //         let normalizedSongs = fetsongs.map(song => song.split(/[\(_]/)[0] + ".mp3");
-        
-        //         matchingSong = fetsongs.find((song, index) => {
-        //             let normalized = normalizedSongs[index];
-        //             if (normalized === clickedSong){
-        //                 return song;
-        //             }else{
-        //             console.log("song not found")
-        //         });
-        //         let matchedSong = await getsongs(matchingSong);
-        //         console.log('matchedSong :' + matchedSong)
-                
-            
-                        
-                    });
-                 
-                    currentAudio.addEventListener('ended', () => {
+                       currentAudio.addEventListener('ended', () => {
                         console.log('Audio has ended.');
                         currentAudio = null;
                         updatePlayPauseIcon(false);
@@ -124,7 +102,7 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                 // } else {
                 //     console.error('Song not found in the songs array.');
                 // }
-            // });
+            });
         });
         document.querySelector(".seekbar").addEventListener('click', (e) => {
             if (currentAudio) {
@@ -173,6 +151,29 @@ document.querySelector(".playbuttons .next").addEventListener('click', async () 
         document.querySelector(".home svg").addEventListener('click', (e) => {
             document.querySelector(".left").style.left = "-150%";
         });
+                                                 
+    })
+    
+        // document.querySelectorAll('.songslist li').forEach((listItem) => {
+        //     listItem.addEventListener('click', async (e) => {
+        //         let clickedSong = e.target.textContent
+        //         let normalizedSongs = fetsongs.map(song => song.split(/[\(_]/)[0] + ".mp3");
+        
+        //         matchingSong = fetsongs.find((song, index) => {
+        //             let normalized = normalizedSongs[index];
+        //             if (normalized === clickedSong){
+        //                 return song;
+        //             }else{
+        //             console.log("song not found")
+        //         });
+        //         let matchedSong = await getsongs(matchingSong);
+        //         console.log('matchedSong :' + matchedSong)
+                
+            
+                        
+                    // });
+                 
+         
     // });
 // }
     }
