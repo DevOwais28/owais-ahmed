@@ -79,7 +79,7 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                         currentAudio.pause();
                         currentAudio.currentTime = 0;
                     }
-        
+              }
                     currentAudio = new Audio(matchedSong);
                     currentAudio.preload = "auto";
                     currentAudio.play();
@@ -91,7 +91,8 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                             let percentage = (currentAudio.currentTime / currentAudio.duration) * 100;
                             document.querySelector(".seekbar .circle").style.left = percentage + "%";
                         }
-        } else {
+        )}
+                                                  }else {
             console.error('Song not found in the songs array.');
         }
     });
