@@ -70,9 +70,9 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
         let matchingSong = fetsongs.find((song) => {
             return song.includes(clickedSong); // Check if the song name contains the clicked song
         });
-
+  let matchedSong;
         if (matchingSong) {
-            let matchedSong = await getsongs(matchingSong);
+        matchedSong = await getsongs(matchingSong);
             console.log(matchedSong);
               if (matchedSong) {
                     if (currentAudio && !currentAudio.paused) {
