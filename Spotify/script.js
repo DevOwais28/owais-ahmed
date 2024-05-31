@@ -64,23 +64,17 @@ function main() {
             }
         });
         let matchingSong;
+document.querySelectorAll('.songslist li').forEach((listItem) => {
+    listItem.addEventListener('click', async (e) => {
+        let clickedSong = e.target.textContent.trim();
+        let matchingSong = fetsongs.find((song) => {
+            return song.includes(clickedSong); // Check if the song name contains the clicked song
+        });
 
-        document.querySelectorAll('.songslist li').forEach((listItem) => {
-            listItem.addEventListener('click', async (e) => {
-                let clickedSong = e.target.textContent
-                let normalizedSongs = fetsongs.map(song => song.split(/[\(_]/)[0] + ".mp3");
-        
-                matchingSong = fetsongs.find((song, index) => {
-                    let normalized = normalizedSongs[index];
-                    if (normalized === clickedSong){
-                        return song;
-                    }else{
-                    console.log("song not found")
-                });
-                let matchedSong = await getsongs(matchingSong);
-                console.log('matchedSong :' + matchedSong)
-                
-                if (matchedSong) {
+        if (matchingSong) {
+            let matchedSong = await getsongs(matchingSong);
+            console.log(matchedSong);
+              if (matchedSong) {
                     if (currentAudio && !currentAudio.paused) {
                         currentAudio.pause();
                         currentAudio.currentTime = 0;
@@ -97,6 +91,27 @@ function main() {
                             let percentage = (currentAudio.currentTime / currentAudio.duration) * 100;
                             document.querySelector(".seekbar .circle").style.left = percentage + "%";
                         }
+        } else {
+            console.error('Song not found in the songs array.');
+        }
+    });
+    
+        // document.querySelectorAll('.songslist li').forEach((listItem) => {
+        //     listItem.addEventListener('click', async (e) => {
+        //         let clickedSong = e.target.textContent
+        //         let normalizedSongs = fetsongs.map(song => song.split(/[\(_]/)[0] + ".mp3");
+        
+        //         matchingSong = fetsongs.find((song, index) => {
+        //             let normalized = normalizedSongs[index];
+        //             if (normalized === clickedSong){
+        //                 return song;
+        //             }else{
+        //             console.log("song not found")
+        //         });
+        //         let matchedSong = await getsongs(matchingSong);
+        //         console.log('matchedSong :' + matchedSong)
+                
+            
                         
                     });
                  
