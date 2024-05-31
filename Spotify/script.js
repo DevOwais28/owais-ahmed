@@ -91,7 +91,7 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                             let percentage = (currentAudio.currentTime / currentAudio.duration) * 100;
                             document.querySelector(".seekbar .circle").style.left = percentage + "%";
                         }
-        )}
+                    })
                                                   }else {
             console.error('Song not found in the songs array.');
         }
