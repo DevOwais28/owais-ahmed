@@ -1,4 +1,5 @@
-  try {
+async function getsongs(matchingSong) {
+try {
         let response = await fetch(`/Songs/${matchingSong}`);
         let audioURL =  response.url; // Assuming the response is the URL of the audio file
         audioURL.preload='auto'
