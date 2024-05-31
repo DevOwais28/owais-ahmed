@@ -253,10 +253,7 @@ margin-bottom:5px;
         width:94vw;
         left:2%;
     }
-    .songslist li {
-    /* Disable tap highlight on mobile devices */
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
+
 }
 
 
