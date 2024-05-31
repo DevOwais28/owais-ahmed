@@ -121,10 +121,10 @@ document.querySelectorAll('.songslist li').forEach((listItem) => {
                         currentAudio = null;
                         updatePlayPauseIcon(false);
                     });
-                } else {
-                    console.error('Song not found in the songs array.');
-                }
-            });
+                // } else {
+                //     console.error('Song not found in the songs array.');
+                // }
+            // });
         });
         document.querySelector(".seekbar").addEventListener('click', (e) => {
             if (currentAudio) {
@@ -173,7 +173,7 @@ document.querySelector(".playbuttons .next").addEventListener('click', async () 
         document.querySelector(".home svg").addEventListener('click', (e) => {
             document.querySelector(".left").style.left = "-150%";
         });
-    });
-}
-
+    // });
+// }
+    }
 main();
