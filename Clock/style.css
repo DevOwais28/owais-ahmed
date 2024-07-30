@@ -1,0 +1,143 @@
+html {
+  height: 100%;
+  width: 100%;
+  margin:0;
+  padding:0;
+  overflow: hidden;
+}
+body{
+  height:100%;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+}
+
+.clock{
+  min-width:250px;
+  min-height:250px;
+  background-color: #000000;
+  box-shadow: 20px 20px 30px 30px #8f8f8f;
+  -webkit-box-shadow: 20px 20px 30px 30px #8f8f8f;
+  border-radius: 200px;
+  position: relative;
+}
+.center{
+  min-width:15px;
+  min-height:15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  position: absolute;
+  top:43%;
+  left:48%;
+
+}
+.time{
+  display:flex;
+  align-items:center;
+}
+.hour {
+  position: absolute;
+  top:25%;
+  right:49%;
+  transform: rotate(0deg); /* Adjust rotation as needed */
+  width: 4px;
+  height:20%;
+  border-radius:30px 0px 0px 20px;
+  background-color: #ffffff;
+}
+.minute{
+  position: absolute;
+  top:6%;
+  right:49%;
+  transform: rotate(0deg); /* Adjust rotation as needed */
+  min-width: 4px;
+  min-height:40%;
+  border-radius:30px 0px 0px 20px;
+  background-color: #ffffff;
+}
+.second{
+  position: absolute;
+  top:10%;
+  right:49%;
+  transform: rotate(0deg); /* Adjust rotation as needed */
+  min-width: 3px;
+  min-height:35%;
+  border-radius:30px 0px 0px 20px;
+  background-color: #ffffff;
+}
+
+
+.text {
+  color:white;
+  position: absolute;
+  width: 20px; /* Adjust width and height as needed */
+  height: 20px; /* Adjust width and height as needed */
+  text-align: center;
+  font-family:georgia;
+  font-weight:bold ;
+  font-size:clamp(15px,2vw,20px);
+}
+
+.text:nth-child(1){
+  position :absolute;
+  top:5%;
+  left:45%;
+}
+.text:nth-child(2){
+  position :absolute;
+  top:12%;
+  right:22%;
+}
+  .text:nth-child(3){
+  position :absolute;
+  top:27%;
+  right:9%;
+    }
+    .text:nth-child(4){
+  position :absolute;
+  top:45%;
+  right:5%;
+      }
+  .text:nth-child(5){
+  position :absolute;
+  top:65%;
+  right:7%;
+        }
+    
+.text:nth-child(6){
+  position :absolute;
+  top:83%;
+  right:24%;
+  }
+  .text:nth-child(7){
+  position :absolute;
+  top:90%;
+  right:45%;
+    }
+  .text:nth-child(8){
+  position :absolute;
+  top:84%;
+  left:24%;
+    }
+  .text:nth-child(9){
+  position :absolute;
+  top:65%;
+  left:9%;
+    }
+  .text:nth-child(10){
+  position :absolute;
+  top:45%;
+  left:3%;
+    }
+  .text:nth-child(11){
+  position :absolute;
+  top:27%;
+  left:9%;
+      }
+  .text:nth-child(12){
+  position :absolute;
+  top:12%;
+  left:22%;
+     }
